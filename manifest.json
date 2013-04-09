@@ -1,0 +1,14 @@
+{
+  "name": "Social Authority Hovercard",
+  "version": "0.0.1",
+  "manifest_version": 2,
+
+  "description": "Mouse-over any Twitter user and get their Social Authority.",
+
+  "content_scripts": [
+    {
+      "js": ["jquery-1.9.1.min.js", "TwitterUsers.js" ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
