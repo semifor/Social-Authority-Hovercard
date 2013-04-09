@@ -5,10 +5,8 @@ function TwitterUsers()
 {
 
   function init() {
-
     // Clear out old event namespace.
     $(document).off('.metrics');
-
     // Find all Twitter links and pass them to a handler.
     $('a').filter(
       function() {
@@ -18,8 +16,10 @@ function TwitterUsers()
   }
 
   function handleEachUser() {
-    $(this).css("background-color", "#ede7d0");}
-    $(this).on("mouseover.metrics", function() {});
+    $(this).css("background-color", "#ede7d0");
+    $(this).on("mouseover.metrics", function() {
+      console.log($(this).html());
+    });
   }
 
   init();
