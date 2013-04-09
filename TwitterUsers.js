@@ -1,4 +1,4 @@
-var TwitterUsers || {};
+var TwitterUsers = TwitterUsers || {};
 
 TwitterUsers = 
 {
