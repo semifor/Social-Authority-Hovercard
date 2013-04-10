@@ -23,18 +23,16 @@
 
     function handleEachUser() {
 
-      $(this).css("background-color", "#ede7d0");
+      var username = $(this).attr('href').replace(/.*?twitter\.com\/(.*)/, "$1"); 
 
-      $(this).on("mouseover.metrics", function() {
-        console.log($(this).html());
-        $(this).qtip({
-          tip: {corner: true, method: 'polygon'},
-          classes: 'ui-tooltip-blue ui-tooltip-bootstrap',
-          position: {viewport: $(window)},
-          hide: {event: "click mouseleave", inactive: 2000},
-          content: {text: $(this).html()}
-        });
+      $(this).css("background-color", "#ede7d0").qtip({
+        style: {tip: {corner: true, method: 'polygon'},
+        classes: 'ui-tooltip-blue ui-tooltip-bootstrap'},
+        position: {viewport: $(window)},
+        hide: {event: "click mouseleave", inactive: 2000},
+        content: {text: "Social Authority of @" + username + ": "}
       });
+
     }
 
     init();
