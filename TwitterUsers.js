@@ -78,8 +78,8 @@
 
   }
 
-  new TwitterUsers();
+  $(document).ready(function() {
+    new TwitterUsers();
+  });
 
 })();
-
-
