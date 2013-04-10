@@ -18,21 +18,52 @@
           return $(this).attr('href')
             .match(/https?:\/\/(www\.)?twitter.com\//);
         }
-      ).each(handleEachUser);
+      ).each(eventifyUser);
     }
 
-    function handleEachUser() {
+    function eventifyUser() {
 
-      var username = $(this).attr('href').replace(/.*?twitter\.com\/(.*)/, "$1"); 
+      var trigger = $(this);
 
-      $(this).css("background-color", "#ede7d0").qtip({
-        style: {tip: {corner: true, method: 'polygon'},
-        classes: 'ui-tooltip-blue ui-tooltip-bootstrap'},
-        position: {viewport: $(window)},
-        hide: {event: "click mouseleave", inactive: 2000},
-        content: {text: "Social Authority of @" + username + ": "}
+      var username = trigger.attr('href')
+        .replace(/.*?twitter\.com\/(.*)/, "$1");
+
+      trigger.css("background-color", "#ede7d0");
+
+      trigger.on("mouseover", function() {
+        $.ajax("https://api.followerwonk.com/social-authority?screen_name=" +
+          username + ";AccessID=member-65c6f0bdee;Expires=TIMESTAMP;" +
+          "Signature=0410f8972b16b2763ab2d91150e0a832")
+            .done(renderTip)
+            .fail(function() {alert("failed");})
+            .always();
       });
 
+      function renderTip() {
+        alert("success");
+        trigger.qtip({
+          style: {
+            tip: {
+              corner: true, method: 'polygon'
+            },
+            classes: 'qtip-blue qtip-shadow qtip-rounded'
+          },
+          position: {
+            viewport: $(window)
+          },
+          hide: {
+            event: "click mouseleave",
+            inactive: 2000,
+            delay: 1000,
+            distance: 125,
+            fixed: true
+          },
+          content: {
+            text: "<a href=\"http://followerwonk.com/social-authority\" " +
+              "target=\"_blank\">Social Authority</a> of @" + username + ": " +
+              "83"
+          }
+      });
     }
 
     init();
@@ -42,3 +73,4 @@
   new TwitterUsers();
 
 })();
+
