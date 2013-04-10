@@ -34,13 +34,19 @@
         $.ajax("https://api.followerwonk.com/social-authority?screen_name=" +
           username + ";AccessID=member-65c6f0bdee;Expires=TIMESTAMP;" +
           "Signature=0410f8972b16b2763ab2d91150e0a832")
-            .done(renderTip)
-            .fail(function() {alert("failed");})
+            .done(
+              function(json) {
+                renderTip(json, trigger, username);
+              }
+            )
+            .fail()
             .always();
       });
+    }
 
-      function renderTip() {
-        alert("success");
+    function renderTip(json, trigger, username) {
+      var saScore = Math.round(json._embedded[0].social_authority);
+      if (saScore > 0) {
         trigger.qtip({
           style: {
             tip: {
@@ -61,9 +67,11 @@
           content: {
             text: "<a href=\"http://followerwonk.com/social-authority\" " +
               "target=\"_blank\">Social Authority</a> of @" + username + ": " +
-              "83"
+              saScore
           }
-      });
+        });
+        trigger.qtip('show');
+      }
     }
 
     init();
@@ -73,4 +81,5 @@
   new TwitterUsers();
 
 })();
+
 
