@@ -7,7 +7,8 @@
 
   "content_scripts": [
     {
-      "js": ["jquery-1.9.1.min.js", "TwitterUsers.js" ],
+      "js": ["jquery-1.9.1.min.js", "jquery.qtip.min.js", "TwitterUsers.js"],
+      "css": ["jquery.qtip.min.css"],
       "matches": ["<all_urls>"]
     }
   ]
