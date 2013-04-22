@@ -7,6 +7,8 @@
   function TwitterUsers()
   {
 
+    var socialAuthorityFor = {};
+
     function init() {
 
       // Clear out old event namespace.
@@ -31,12 +33,18 @@
       trigger.css("background-color", "#ede7d0");
 
       trigger.on("mouseover", function() {
+        if ( 'jss' + username in socialAuthorityFor ) {
+          renderTip(trigger, username);
+          return;
+        }
+
         $.ajax("https://api.followerwonk.com/social-authority?screen_name=" +
           username + ";AccessID=member-65c6f0bdee;Expires=TIMESTAMP;" +
           "Signature=0410f8972b16b2763ab2d91150e0a832")
             .done(
               function(json) {
-                renderTip(json, trigger, username);
+                socialAuthorityFor['jss' + username] = Math.round(json._embedded[0].social_authority);
+                renderTip(trigger, username);
               }
             )
             .fail()
@@ -44,8 +52,8 @@
       });
     }
 
-    function renderTip(json, trigger, username) {
-      var saScore = Math.round(json._embedded[0].social_authority);
+    function renderTip(trigger, username) {
+      var saScore = socialAuthorityFor['jss' + username];
       if (saScore > 0) {
         trigger.qtip({
           style: {
