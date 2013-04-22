@@ -38,9 +38,16 @@
           return;
         }
 
+        /**
+         * EDIT THE FOLLOWING TWO LINES.
+         * Please add your Social Authority API credentials below.
+         * You can obtain these from http://followerwonk.com/social-authority
+         */
+        var accessID = "member-65c6f0bdee";
+        var secretKey = "0410f8972b16b2763ab2d91150e0a832";
+
         $.ajax("https://api.followerwonk.com/social-authority?screen_name=" +
-          username + ";AccessID=member-65c6f0bdee;Expires=TIMESTAMP;" +
-          "Signature=0410f8972b16b2763ab2d91150e0a832")
+          username + ";AccessID="  + accessID + ";" + "Signature=" + secretKey)
             .done(
               function(json) {
                 socialAuthorityFor['jss' + username] = Math.round(json._embedded[0].social_authority);
