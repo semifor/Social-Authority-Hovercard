@@ -8,8 +8,16 @@
   {
 
     var socialAuthorityFor = {};
+    var apiID, apiSecret;
 
     function init() {
+
+      chrome.extension.sendRequest({ 'sa-credentials': true }, function (response) {
+        if ( response ) {
+          apiID = response.apiID;
+          apiSecret = response.apiSecret;
+        }
+      });
 
       // Clear out old event namespace.
       $(document).off('.metrics');
@@ -38,17 +46,7 @@
           return;
         }
 
-        /**
-         * EDIT THE FOLLOWING TWO LINES.
-         * Please add your Social Authority API credentials below.
-         * You can obtain these from http://followerwonk.com/social-authority
-         */
-        var accessID = "member-MWNhMGU4MWEtMjM4NS01YzUwLWEyMjMtZDUxN2Y5ZDkxMjVi";
-        var signature = "0067a3fc35691d76864d1b556caa469502ad19e0";
-
-
-        $.ajax("https://api.followerwonk.com/social-authority?screen_name=" +
-          username + ";AccessID="  + accessID + ";Timestamp=1366675908;Signature=" + signature)
+        $.ajax(apiRequestUrl(username))
             .done(
               function(json) {
                 socialAuthorityFor['jss' + username] = Math.round(json._embedded[0].social_authority);
@@ -88,6 +86,14 @@
         });
         trigger.qtip('show');
       }
+    }
+
+    function apiRequestUrl(username) {
+      var timestamp = Math.floor((new Date).getTime() / 1000);
+      var hmac = CryptoJS.HmacSHA1(apiID + '\n' + timestamp, apiSecret);
+      return 'https://api.followerwonk.com/social-authority?screen_name=' +
+          username + ';AccessID=' + apiID + ';Timestamp=' + timestamp +
+          ';Signature=' + hmac;
     }
 
     init();

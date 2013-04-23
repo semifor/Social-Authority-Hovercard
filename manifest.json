@@ -5,9 +5,20 @@
 
   "description": "Mouse-over any Twitter user and get their Social Authority.",
 
+  "options_page": "options.html",
+
+  "background": {
+    "scripts": [ "bg.js" ]
+  },
+
   "content_scripts": [
     {
-      "js": ["jquery-1.9.1.min.js", "jquery.qtip.min.js", "TwitterUsers.js"],
+      "js": [
+        "jquery-1.9.1.min.js",
+        "jquery.qtip.min.js",
+        "hmac-sha1.js",
+        "TwitterUsers.js"
+      ],
       "css": ["jquery.qtip.min.css"],
       "matches": ["<all_urls>"]
     }
