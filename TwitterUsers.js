@@ -43,11 +43,12 @@
          * Please add your Social Authority API credentials below.
          * You can obtain these from http://followerwonk.com/social-authority
          */
-        var accessID = "member-65c6f0bdee";
-        var secretKey = "0410f8972b16b2763ab2d91150e0a832";
+        var accessID = "member-MWNhMGU4MWEtMjM4NS01YzUwLWEyMjMtZDUxN2Y5ZDkxMjVi";
+        var signature = "0067a3fc35691d76864d1b556caa469502ad19e0";
+
 
         $.ajax("https://api.followerwonk.com/social-authority?screen_name=" +
-          username + ";AccessID="  + accessID + ";" + "Signature=" + secretKey)
+          username + ";AccessID="  + accessID + ";Timestamp=1366675908;Signature=" + signature)
             .done(
               function(json) {
                 socialAuthorityFor['jss' + username] = Math.round(json._embedded[0].social_authority);
