@@ -12,12 +12,12 @@ Social Authority.
 To use:
 
 1. [Get your API credentials!](http://followerwonk.com/social-authority)
-1. Download the zip
-2. Edit the source code of TwitterUsers.js and enter your API credentials where
-noted
-3. Then go to Chrome and type in the address bar `chrome://extensions/`
-4. Make sure to check `Developer Mode` in the top right corner
-5. Then, click `Load unpacked extension` and choose the unzipped directory
+2. Download and unpack the zip
+3. Then go to Chrome and type in the address bar `chrome://extensions/`.
+4. Make sure to check `Developer Mode` in the top right corner.
+5. Then, click `Load unpacked extension` and choose the unzipped directory.
+6. Select the Options link for the Social Authority Hovercard and paste
+   in your Access ID and Secret Key.
 
 Then, to try it out, go to a page with a lot of Twitter handles. But not
 Twitter.com (as they handle their handles in a highly complex manner). Mouse
