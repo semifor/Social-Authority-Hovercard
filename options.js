@@ -1,6 +1,6 @@
 function loadOptions() {
-    document.getElementById('access-id').value = localStorage['apiID'];
-    document.getElementById('secret-key').value = localStorage['apiSecret'];
+    document.getElementById('access-id').value = localStorage['apiID'] || '';
+    document.getElementById('secret-key').value = localStorage['apiSecret'] || '';
 }
 
 function saveOptions() {
