@@ -1,6 +1,8 @@
 Social Authority Hovercard
 ==========================
 
+**This project has been archived because Twitter discontinued the API's that made the Social Authority score possible. The Social Authority API is no longer available.**
+
 *Note: this is a very quick and dirty example use of the [Social Authority
 API](http://followerwonk.com/social-authority).  It does not work on all pages.
 We plan to update this from time to time with
